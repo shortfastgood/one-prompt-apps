@@ -99,3 +99,8 @@ This is a polished MVP focused on core gameplay and usability. It is designed to
 - Multiple maps
 - Difficulty settings
 - Save/load progression
+## Document History
+
+| Date | Description | Author |
+|---|---|---|
+| 26 February 2026 | Added the initial document history section. | dden/codex |

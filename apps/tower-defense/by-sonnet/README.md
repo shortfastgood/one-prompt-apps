@@ -112,3 +112,8 @@ Open `index.html` directly in any modern browser. No server, no installation req
 - **Sniper towers** (especially Pierce/Railgun at level 2–3) pay off against the long straight segments in the mid-path.
 - Upgrade coverage towers before buying new ones — a level-3 Arrow beats two level-1 Arrows for the same money.
 - Save some money going into late waves so you can react to Boss compositions.
+## Document History
+
+| Date | Description | Author |
+|---|---|---|
+| 26 February 2026 | Added the initial document history section. | dden/codex |
