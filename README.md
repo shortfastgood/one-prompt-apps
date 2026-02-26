@@ -1,4 +1,4 @@
-# Single Prompts Applications
+# One Prompt Applications
 
 This is a collection of simple, fully working applications created for at least 95% from a single prompt. The remaining 5% tolerance reflects the fact that one or more versions required minor adjustments to fix small issues in the graphics or calculations.
 
