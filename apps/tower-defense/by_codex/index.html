@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Line Defense</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="board-panel">
+      <div class="panel-header">
+        <div>
+          <h1>Neon Line Defense</h1>
+          <p>Hold the route. Build towers, upgrade smart, survive the waves.</p>
+        </div>
+      </div>
+      <div class="canvas-shell">
+        <canvas id="gameCanvas" width="960" height="540" aria-label="Tower defense game board"></canvas>
+      </div>
+    </section>
+
+    <aside class="sidebar" aria-label="Game controls">
+      <section class="ui-card stats-card">
+        <h2>Stats</h2>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <span class="label">Wave</span>
+            <span id="waveStat" class="value">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Lives</span>
+            <span id="livesStat" class="value">20</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Money</span>
+            <span id="moneyStat" class="value">$0</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Enemies</span>
+            <span id="enemiesStat" class="value">0</span>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="label">Status</span>
+          <span id="statusStat" class="value status-pill">Intermission</span>
+        </div>
+      </section>
+
+      <section class="ui-card">
+        <h2>Wave Controls</h2>
+        <div class="button-stack">
+          <button id="startWaveBtn" class="primary-btn">Start Next Wave</button>
+          <div class="row-buttons">
+            <button id="pauseBtn" class="secondary-btn">Pause</button>
+            <button id="restartBtn" class="secondary-btn danger-btn">Restart</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-card">
+        <h2>Build Towers</h2>
+        <div id="buildButtons" class="build-grid" role="group" aria-label="Tower types"></div>
+        <button id="clearBuildBtn" class="ghost-btn">Clear Build Selection</button>
+      </section>
+
+      <section class="ui-card selected-card">
+        <h2>Selected Tower</h2>
+        <div id="selectedPanel" class="selected-panel empty">
+          <p id="towerHint" class="hint-text">Click a tower to inspect it, or choose a tower type and click an open tile to place.</p>
+          <div class="tower-details">
+            <div class="detail-row"><span>Name</span><span id="selectedTowerName">-</span></div>
+            <div class="detail-row"><span>Level</span><span id="selectedTowerLevel">-</span></div>
+            <div class="detail-row"><span>Range</span><span id="selectedTowerRange">-</span></div>
+            <div class="detail-row"><span>Damage</span><span id="selectedTowerDamage">-</span></div>
+            <div class="detail-row"><span>Attack Rate</span><span id="selectedTowerRate">-</span></div>
+          </div>
+          <div class="row-buttons">
+            <button id="upgradeTowerBtn" class="primary-btn" disabled>Upgrade</button>
+            <button id="sellTowerBtn" class="secondary-btn" disabled>Sell</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-card message-card">
+        <h2>Field Report</h2>
+        <p id="statusMessage" class="message-text">Select a tower and prepare for the first wave.</p>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

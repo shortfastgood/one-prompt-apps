@@ -1,0 +1,357 @@
+:root {
+  --bg0: #0c1118;
+  --bg1: #111a24;
+  --bg2: #162434;
+  --card: rgba(15, 23, 34, 0.9);
+  --card-border: rgba(151, 198, 255, 0.15);
+  --text: #ecf4ff;
+  --muted: #a3b3c7;
+  --accent: #47d6a3;
+  --accent-strong: #26ba84;
+  --warn: #f08b57;
+  --danger: #f15c6b;
+  --shadow: 0 16px 40px rgba(3, 7, 12, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: Bahnschrift, "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(71, 214, 163, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(80, 160, 255, 0.14), transparent 45%),
+    linear-gradient(180deg, var(--bg2), var(--bg0));
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  padding: 16px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.board-panel,
+.ui-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+
+.board-panel {
+  padding: 14px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.panel-header h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.panel-header p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.canvas-shell {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(151, 198, 255, 0.2);
+  background: #0b121b;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.02), transparent 45%),
+    linear-gradient(180deg, #111d2a, #0a111a);
+  touch-action: none;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ui-card {
+  padding: 12px;
+}
+
+.ui-card h2 {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #d6e4f6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(151, 198, 255, 0.12);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.value {
+  display: block;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.status-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-row .label {
+  font-size: 0.8rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(71, 214, 163, 0.12);
+  border: 1px solid rgba(71, 214, 163, 0.28);
+  color: #bff7e3;
+  margin-top: 0;
+  font-size: 0.78rem;
+}
+
+.button-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.row-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+button {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 9px 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease, opacity 120ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(120, 188, 255, 0.7);
+  outline-offset: 1px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary-btn {
+  background: linear-gradient(180deg, rgba(71, 214, 163, 0.24), rgba(38, 186, 132, 0.2));
+  border-color: rgba(71, 214, 163, 0.34);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(151, 198, 255, 0.18);
+}
+
+.danger-btn {
+  border-color: rgba(241, 92, 107, 0.28);
+  background: rgba(241, 92, 107, 0.08);
+}
+
+.ghost-btn {
+  margin-top: 8px;
+  background: transparent;
+  border-color: rgba(151, 198, 255, 0.18);
+  color: var(--muted);
+}
+
+.build-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.tower-btn {
+  text-align: left;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(151, 198, 255, 0.16);
+}
+
+.tower-btn.active {
+  border-color: rgba(120, 200, 255, 0.45);
+  background: rgba(120, 200, 255, 0.1);
+}
+
+.tower-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.tower-btn .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tower-btn .meta strong {
+  font-size: 0.9rem;
+}
+
+.tower-btn .meta span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.tower-btn .cost {
+  font-weight: 700;
+  color: #c6f2df;
+}
+
+.selected-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.selected-panel.empty .tower-details {
+  opacity: 0.55;
+}
+
+.hint-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.tower-details {
+  display: grid;
+  gap: 6px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.87rem;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(151, 198, 255, 0.09);
+}
+
+.detail-row span:first-child {
+  color: var(--muted);
+}
+
+.message-text {
+  margin: 0;
+  min-height: 2.6em;
+  color: #dce9fb;
+  line-height: 1.35;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1180px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .message-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 15px;
+  }
+
+  .app-shell {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .board-panel {
+    padding: 10px;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .row-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
