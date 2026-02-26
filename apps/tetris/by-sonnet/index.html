@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetris</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="game-wrapper">
+
+      <!-- Left sidebar -->
+      <aside id="sidebar-left">
+        <div class="panel" id="hold-panel">
+          <div class="panel-label">HOLD</div>
+          <canvas id="hold-canvas" width="100" height="100"></canvas>
+        </div>
+        <div class="panel" id="controls-panel">
+          <div class="panel-label">CONTROLS</div>
+          <ul class="controls-list">
+            <li><span class="key">←→</span> Move</li>
+            <li><span class="key">↑ / Z</span> Rotate CW</li>
+            <li><span class="key">X</span> Rotate CCW</li>
+            <li><span class="key">↓</span> Soft drop</li>
+            <li><span class="key">Space</span> Hard drop</li>
+            <li><span class="key">C</span> Hold</li>
+            <li><span class="key">P</span> Pause</li>
+            <li><span class="key">R</span> Restart</li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main board -->
+      <div id="board-container">
+        <canvas id="board-canvas"></canvas>
+
+        <!-- Overlays -->
+        <div id="overlay" class="overlay hidden">
+          <div id="overlay-content">
+            <h1 id="overlay-title">TETRIS</h1>
+            <p id="overlay-message"></p>
+            <div id="overlay-score-block" class="hidden">
+              <div class="stat-row"><span>SCORE</span><span id="final-score">0</span></div>
+              <div class="stat-row"><span>LEVEL</span><span id="final-level">0</span></div>
+              <div class="stat-row"><span>LINES</span><span id="final-lines">0</span></div>
+            </div>
+            <button id="overlay-btn">PLAY</button>
+          </div>
+        </div>
+
+        <div id="pause-overlay" class="overlay hidden">
+          <div id="pause-content">
+            <h1>PAUSED</h1>
+            <p>Press <strong>P</strong> to resume</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right sidebar -->
+      <aside id="sidebar-right">
+        <div class="panel" id="next-panel">
+          <div class="panel-label">NEXT</div>
+          <canvas id="next-canvas-0" width="100" height="100"></canvas>
+          <canvas id="next-canvas-1" width="100" height="80"></canvas>
+          <canvas id="next-canvas-2" width="100" height="80"></canvas>
+        </div>
+        <div class="panel" id="score-panel">
+          <div class="panel-label">SCORE</div>
+          <div id="score-value" class="stat-value">0</div>
+        </div>
+        <div class="panel">
+          <div class="panel-label">LEVEL</div>
+          <div id="level-value" class="stat-value">1</div>
+        </div>
+        <div class="panel">
+          <div class="panel-label">LINES</div>
+          <div id="lines-value" class="stat-value">0</div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

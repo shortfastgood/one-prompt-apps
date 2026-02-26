@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetris MVP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="game-panel" aria-label="Tetris game">
+      <div class="board-shell">
+        <canvas
+          id="board"
+          class="board-canvas"
+          width="300"
+          height="600"
+          aria-label="Tetris playfield"
+        ></canvas>
+        <div id="boardOverlay" class="board-overlay" aria-live="polite"></div>
+      </div>
+      <div class="button-row">
+        <button id="pauseBtn" type="button" class="action-btn">Pause</button>
+        <button id="restartBtn" type="button" class="action-btn action-btn--alt">Restart</button>
+      </div>
+    </section>
+
+    <aside class="side-panel" aria-label="Game stats and controls">
+      <section class="card stats-card">
+        <h1>Tetris</h1>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat__label">Score</span>
+            <span id="scoreValue" class="stat__value">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">Level</span>
+            <span id="levelValue" class="stat__value">1</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">Lines</span>
+            <span id="linesValue" class="stat__value">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">State</span>
+            <span id="stateValue" class="stat__value stat__value--small">Running</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card preview-card">
+        <h2>Hold</h2>
+        <canvas id="holdCanvas" class="mini-canvas" width="140" height="140" aria-label="Held piece"></canvas>
+      </section>
+
+      <section class="card preview-card">
+        <h2>Next</h2>
+        <div class="next-list">
+          <canvas id="nextCanvas0" class="mini-canvas mini-canvas--small" width="140" height="90" aria-label="Next piece 1"></canvas>
+          <canvas id="nextCanvas1" class="mini-canvas mini-canvas--small" width="140" height="90" aria-label="Next piece 2"></canvas>
+          <canvas id="nextCanvas2" class="mini-canvas mini-canvas--small" width="140" height="90" aria-label="Next piece 3"></canvas>
+        </div>
+      </section>
+
+      <section class="card controls-card">
+        <h2>Controls</h2>
+        <ul>
+          <li><kbd>←</kbd>/<kbd>A</kbd> Move left</li>
+          <li><kbd>→</kbd>/<kbd>D</kbd> Move right</li>
+          <li><kbd>↓</kbd>/<kbd>S</kbd> Soft drop</li>
+          <li><kbd>Space</kbd> Hard drop</li>
+          <li><kbd>↑</kbd>/<kbd>X</kbd>/<kbd>W</kbd> Rotate CW</li>
+          <li><kbd>Z</kbd>/<kbd>Ctrl</kbd> Rotate CCW</li>
+          <li><kbd>C</kbd>/<kbd>Shift</kbd> Hold piece</li>
+          <li><kbd>P</kbd>/<kbd>Esc</kbd> Pause</li>
+          <li><kbd>R</kbd> Restart</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
