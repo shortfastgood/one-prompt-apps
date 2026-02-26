@@ -1,5 +1,7 @@
 # Tower Defense (by Codex)
 
+![scrrenshot](screenshot.png)
+
 ## Overview
 
 This project is a playable tower defense MVP built as a browser game with a fixed enemy path, wave-based spawning, tower placement/upgrades, and basic game-state controls (pause/restart).

@@ -1,5 +1,7 @@
 # Tower Defense (by Sonnet)
 
+![screenshot](screenshot.jpg)
+
 ## Architect Requirement
 
 The architect gave Claude Sonnet a single prompt to produce a complete, playable tower defense game as **one self-contained HTML file** — no build step, no external dependencies, no separate asset files. The full requirement was:
