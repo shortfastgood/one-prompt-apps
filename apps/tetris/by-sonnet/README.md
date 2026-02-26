@@ -2,6 +2,8 @@
 
 A complete, playable Tetris implementation built as a single-prompt app.
 
+![screenshot](screenshot.png)
+
 ## Play
 
 Open `index.html` directly in a browser — no build step required. Because the code uses ES modules you need to serve it from a local HTTP server (or use VS Code's Live Server extension):
