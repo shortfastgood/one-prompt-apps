@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tetris</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="left-panel">
+            <div class="panel-box hold-box">
+                <h2>HOLD</h2>
+                <canvas id="hold-canvas" width="120" height="120"></canvas>
+            </div>
+            <div class="controls-hint">
+                <p><b>Arrows:</b> Move / Rotate</p>
+                <p><b>Space:</b> Hard Drop</p>
+                <p><b>Shift/C:</b> Hold</p>
+                <p><b>P/Esc:</b> Pause</p>
+            </div>
+        </div>
+        
+        <div class="main-board">
+            <canvas id="board-canvas" width="300" height="600"></canvas>
+            <div id="game-over-screen" class="overlay hidden">
+                <h2>GAME OVER</h2>
+                <p>Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">Restart</button>
+            </div>
+            <div id="pause-screen" class="overlay hidden">
+                <h2>PAUSED</h2>
+                <button id="resume-btn">Resume</button>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="panel-box next-box">
+                <h2>NEXT</h2>
+                <canvas id="next-canvas" width="120" height="360"></canvas>
+            </div>
+            <div class="panel-box stats-box">
+                <div class="stat">
+                    <span>SCORE</span>
+                    <div id="score">0</div>
+                </div>
+                <div class="stat">
+                    <span>LEVEL</span>
+                    <div id="level">1</div>
+                </div>
+                <div class="stat">
+                    <span>LINES</span>
+                    <div id="lines">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
