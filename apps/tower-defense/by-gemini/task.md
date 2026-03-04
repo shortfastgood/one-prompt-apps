@@ -1,0 +1,30 @@
+# Tower Defense Game Task Tracker
+
+- [x] Project Setup
+  - [x] Create HTML structure
+  - [x] Create CSS styling
+- [x] Core Engine
+  - [x] Game loop & state management
+  - [x] Grid and rendering setup
+  - [x] Map path definition
+- [x] Entities
+  - [x] Enemy system & wave management
+  - [x] Projectile system
+  - [x] Base Tower & 3 Tower variants
+- [x] Gameplay & Mechanics
+  - [x] Tower placement logic (prevent placing on path/existing)
+  - [x] Target acquisition & shooting
+  - [x] Enemy movement, taking damage, reaching end
+  - [x] Economy (earning money, upgrading, selling)
+- [x] User Interface
+  - [x] HUD (lives, wave, money)
+  - [x] Build menu
+  - [x] Selection menu (Upgrade/Sell)
+  - [x] Flow controls (Start, Pause, Restart)
+- [x] Polish
+  - [x] Balancing (cost, damage, health scaling)
+  - [x] Visual polish
+- [x] Map & UI Refinements
+  - [x] Make canvas/battlefield larger
+  - [x] Make enemy path more complex and winding
+  - [x] Prevent HUD/UI from overlapping the playable board area

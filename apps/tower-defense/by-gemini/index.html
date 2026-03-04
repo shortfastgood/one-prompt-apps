@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Canvas for Game World -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- UI Overlay -->
+        <div id="ui-overlay">
+            <!-- Top HUD: Stats -->
+            <div id="hud" class="panel glass">
+                <div class="stat"><span class="label">WAVE</span><span id="stat-wave">1</span></div>
+                <div class="stat"><span class="label">LIVES</span><span id="stat-lives">20</span></div>
+                <div class="stat"><span class="label">MONEY</span>$<span id="stat-money">300</span></div>
+            </div>
+
+            <!-- Build Menu (Bottom) -->
+            <div id="build-menu" class="panel glass">
+                <div class="tower-btn" data-type="basic" onclick="UI.selectTowerToBuild('basic')">
+                    <div class="tower-icon basic-icon"></div>
+                    <div class="tower-info">
+                        <span class="name">Basic</span>
+                        <span class="cost">$100</span>
+                    </div>
+                </div>
+                <div class="tower-btn" data-type="rapid" onclick="UI.selectTowerToBuild('rapid')">
+                    <div class="tower-icon rapid-icon"></div>
+                    <div class="tower-info">
+                        <span class="name">Rapid</span>
+                        <span class="cost">$200</span>
+                    </div>
+                </div>
+                <div class="tower-btn" data-type="sniper" onclick="UI.selectTowerToBuild('sniper')">
+                    <div class="tower-icon sniper-icon"></div>
+                    <div class="tower-info">
+                        <span class="name">Sniper</span>
+                        <span class="cost">$250</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls (Bottom Right) -->
+            <div id="controls" class="panel glass">
+                <button id="btn-next-wave" onclick="Game.startNextWave()">NEXT WAVE</button>
+                <button id="btn-pause" onclick="Game.togglePause()">PAUSE</button>
+            </div>
+
+            <!-- Context Menu (hidden by default) -->
+            <div id="context-menu" class="panel glass hidden">
+                <h3 id="context-title">Tower Level <span id="context-level">1</span></h3>
+                <div class="context-stats" id="context-stats">
+                    <p>Range: <span id="context-range">100</span></p>
+                    <p>Damage: <span id="context-damage">10</span></p>
+                </div>
+                <div class="context-actions">
+                    <button id="btn-upgrade" onclick="UI.upgradeSelected()">Upgrade ($<span
+                            id="upgrade-cost">150</span>)</button>
+                    <button id="btn-sell" class="sell-btn" onclick="UI.sellSelected()">Sell ($<span
+                            id="sell-value">50</span>)</button>
+                    <button onclick="UI.closeContextMenu()">Close</button>
+                </div>
+            </div>
+
+            <!-- Context Message/Tooltip -->
+            <div id="context-message" class="hidden"></div>
+
+            <!-- Game Over / Win Screen -->
+            <div id="screen-overlay" class="panel glass hidden">
+                <h1 id="screen-title">GAME OVER</h1>
+                <p id="screen-subtitle">You survived until Wave X.</p>
+                <button onclick="Game.restart()">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+    <script src="entities.js"></script>
+    <script src="ui.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

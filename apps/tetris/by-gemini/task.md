@@ -1,0 +1,22 @@
+# Tetris Game Implementation
+
+- [/] Planning
+  - [x] Requirements gathering and design
+- [ ] Implement Foundation
+  - [ ] Setup HTML structure
+  - [ ] Setup CSS styling
+- [ ] Implement Game Logic Structure
+  - [ ] Define Tetromino constants
+  - [ ] Setup game state (board)
+- [ ] Implement Core Mechanics
+  - [ ] Spawning, drawing, collision
+  - [ ] Piece rotation
+  - [ ] Drop mechanics (soft/hard)
+  - [ ] Line clearing, scoring, leveling
+- [ ] Implement Additional Features
+  - [ ] Hold piece, Next piece preview
+  - [ ] Game over, Pause, Restart
+- [ ] Keyboard Controls
+  - [ ] Moving, rotating, hold, drop, pause
+- [ ] Polish
+  - [ ] Clean UI, stats
