@@ -45,3 +45,7 @@ The prompt used was inpired by Dan Cleary (converge.run). See [Medium](https://m
 |---|---|---|
 | 26 February 2026 | Added the Tetris overview section and model comparison notes. | dden/codex |
 | 26 February 2026 | Added the initial document history section. | dden/codex |
+
+## References
+
+https://www.linkedin.com/pulse/coffee-breaks-games-daniele-denti-argof
