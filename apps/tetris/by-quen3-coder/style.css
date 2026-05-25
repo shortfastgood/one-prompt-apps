@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #00ffff;
+}
+
+.game-header h1 {
+    font-size: 2.5rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stats div {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#score, #level {
+    color: #ffcc00;
+}
+
+.game-area {
+    display: flex;
+    gap: 20px;
+}
+
+.game-board {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    gap: 1px;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #00ffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cell {
+    background-color: rgba(30, 30, 46, 0.5);
+    border-radius: 2px;
+}
+
+.cell.filled {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 150px;
+}
+
+.next-piece-container, .hold-piece-container {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ffff;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+.next-piece, .hold-piece {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px;
+}
+
+.controls {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ffff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.controls ul {
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.controls li {
+    margin: 5px 0;
+}
+
+.controls li::before {
+    content: "•";
+    color: #00ffff;
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.5em;
+}
+
+#pause-btn {
+    background: #00ffff;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#pause-btn:hover {
+    background: #00ccff;
+    transform: scale(1.05);
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    z-index: 10;
+}
+
+.game-over h2 {
+    color: #ff0000;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.game-over p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+#restart-btn {
+    background: #00ff00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#restart-btn:hover {
+    background: #00cc00;
+    transform: scale(1.05);
+}
+
+/* Tetromino colors */
+.cell.I { background-color: #00ffff; }
+.cell.J { background-color: #0000ff; }
+.cell.L { background-color: #ff8000; }
+.cell.O { background-color: #ffff00; }
+.cell.S { background-color: #00ff00; }
+.cell.T { background-color: #8000ff; }
+.cell.Z { background-color: #ff0000; }
+
+/* Make cells square */
+.cell {
+    background-color: rgba(30, 30, 46, 0.5);
+    border-radius: 2px;
+    aspect-ratio: 1 / 1; /* Make cells square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell.filled {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animation for line clearing */
+@keyframes clearLine {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.clearing {
+    animation: clearLine 0.3s ease;
+}

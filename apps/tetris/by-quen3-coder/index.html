@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quen3 Tetris</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>Tetris</h1>
+            <div class="stats">
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="level">Level: <span id="level">1</span></div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <div class="game-board" id="board"></div>
+            <div class="side-panel">
+                <div class="next-piece-container">
+                    <h3>Next</h3>
+                    <div class="next-piece" id="next-piece"></div>
+                </div>
+                <div class="controls">
+                    <h3>Controls</h3>
+                    <ul>
+                        <li>← → : Move</li>
+                        <li>↑ : Rotate</li>
+                        <li>↓ : Soft Drop</li>
+                        <li>Space : Hard Drop</li>
+                        <li>C : Hold</li>
+                        <li>P : Pause</li>
+                        <li>R : Restart</li>
+                    </ul>
+                </div>
+                <div class="hold-piece-container">
+                    <h3>Hold</h3>
+                    <div class="hold-piece" id="hold-piece"></div>
+                </div>
+                <button id="pause-btn">Pause</button>
+            </div>
+        </div>
+        
+        <div class="game-over" id="game-over" style="display: none;">
+            <h2>Game Over</h2>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="src/constants.js"></script>
+    <script src="src/tetrominoes.js"></script>
+    <script src="src/board.js"></script>
+    <script src="src/game.js"></script>
+    <script src="src/input.js"></script>
+    <script src="src/renderer.js"></script>
+    <script src="src/main.js"></script>
+    <script>
+        // Start the game when the player presses a key or clicks the start button
+        // The game starts only when the player explicitly starts it
+        game.start();
+    </script>
+</body>
+</html>
