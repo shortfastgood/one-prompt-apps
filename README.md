@@ -44,10 +44,12 @@ The prompt used was inpired by Dan Cleary (converge.run). See [Medium](https://m
 
 | Date | Description | Author |
 |---|---|---|
+| 26 Mai 2026 | Added Tetris development with local LLM (Qwen3-Coder). | dden |
 | 28 February 2026 | Updated the Tetris and Tower Defense comparison paragraphs to include Gemini Pro 3.1 assessment notes and MVP compliance clarification. | dden/codex |
 | 26 February 2026 | Added the Tetris overview section and model comparison notes. | dden/codex |
 | 26 February 2026 | Added the initial document history section. | dden/codex |
 
 ## References
 
-https://www.linkedin.com/pulse/coffee-breaks-games-daniele-denti-argof
+- https://www.linkedin.com/pulse/coffee-breaks-games-daniele-denti-argof
+- https://www.linkedin.com/pulse/may-2026-goodbye-github-copilot-daniele-denti-o6c8f
