@@ -24,11 +24,16 @@ The first model tested that meets the speed and output quality requirements for 
 
 <img src="./apps/tetris/by-sonnet/screenshot.png" width=360>
 
+### Coding by Provider
+
 - [Click here for the Codex version documentation](./apps/tetris/by-codex/README.md)
 - [Click here for the Gemini version documentation](./apps/tetris/by-gemini/README.md)
-- [Click here for the Qwen3-Coder version documentation](./apps/tetris/by-qwen3-coder/README.md)
 - [Click here for the Sonnet version documentation](./apps/tetris/by-sonnet/README.md)
 
+### Coding by Local LLM
+
+- [Click here for the Gemma 4 version documentation](./apps/tetris/by-gemma4:31b-nvfp4/README.md)
+- [Click here for the Qwen3-Coder version documentation](./apps/tetris/by-qwen3-coder/README.md)
 
 ## Tower Defense
 
