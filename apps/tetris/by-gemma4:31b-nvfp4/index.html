@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris - Gemma 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-left">
+            <div class="stat-box">
+                <div class="label">HOLD</div>
+                <canvas id="hold-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+
+        <div id="board-container">
+            <canvas id="game-canvas" width="300" height="600"></canvas>
+            <div id="overlay" class="hidden">
+                <div id="overlay-content">
+                    <h1 id="overlay-title">PAUSED</h1>
+                    <p id="final-score"></p>
+                    <button id="restart-btn">RESTART</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ui-right">
+            <div class="stat-box">
+                <div class="label">NEXT</div>
+                <canvas id="next-canvas" width="100" height="100"></canvas>
+            </div>
+            <div class="stat-box">
+                <div class="label">SCORE</div>
+                <div id="score">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">LEVEL</div>
+                <div id="level">1</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">LINES</div>
+                <div id="lines">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="controls-hint">
+        <p>← → : Move | ↑ : Rotate | ↓ : Soft Drop</p>
+        <p>Space : Hard Drop | C : Hold | P : Pause</p>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
