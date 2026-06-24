@@ -4,7 +4,7 @@ agent: plan
 tools: [execute, read, edit, search, web, agent, todo]
 ---
 - I need a new Python script in the attached folder. 
-- The script name is vresize.phy. 
+- The script name is vresize.py. 
 - The script should be able to resize an entire video sequence. 
 - The script detects the actual size. If no information provided the output size is Full HD (1920x1080 pixels). 
 - The script should be able to upsize and to downsize. 
