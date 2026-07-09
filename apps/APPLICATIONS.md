@@ -46,6 +46,7 @@ The first model found to meet the speed and quality requirements for local use w
 
 - [Gemma 4 version documentation](./tetris/by-gemma4:31b-nvfp4/README.md)
 - [Qwen3-Coder version documentation](./tetris/by-qwen3-coder/README.md)
+- [Ornith 1.0 version documentation](./tetris/by-ornith-35b/README.md)
 
 ## Tower Defense
 

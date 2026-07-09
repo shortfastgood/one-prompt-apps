@@ -1,6 +1,8 @@
-# Tetris – by-ornith-35b
+# Tetris – by Ornith 1.0 35b
 
 A complete, standard-rule Tetris implementation built as a single-page vanilla web app (HTML5 + CSS3 + JavaScript ES Modules with Canvas 2D rendering).
+
+![screenshot](screenshot.png)
 
 ## How to run
 
