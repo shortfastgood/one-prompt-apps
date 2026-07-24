@@ -1,14 +1,40 @@
 # Applications
 
 ## Table of Contents
-- [Tetris](#tetris)
+- [Flight Combat](#flight-combat)
   - [Prompt](#prompt)
-  - [Generation History](#generation-history)
+  - [Generation History](./flight-combat/COMMENTS.md)
   - [Last Generated Code](#last-generated-code)
-- [Tower Defense](#tower-defense)
+- [Tetris](#tetris)
   - [Prompt](#prompt-1)
-  - [Generation History](#generation-history-1)
+  - [Generation History](#generation-history)
   - [Last Generated Code](#last-generated-code-1)
+- [Tower Defense](#tower-defense)
+  - [Prompt](#prompt-2)
+  - [Generation History](#generation-history-1)
+  - [Last Generated Code](#last-generated-code-2)
+
+## Flight Combat
+
+The Flight Combat example is an MVP implementation of a 3D aerial dogfighting game, built to demonstrate aircraft selection, distinct flight characteristics, combat mechanics, and progressively challenging enemy encounters in a compact format. It is intended as a practical example of how a single prompt can produce a playable flight combat game with only limited post-generation refinements.
+
+### Prompt
+
+"*Design and create flight combat simulator game. The game must feature 3d graphics in any style you choose.* 
+
+*A Start Screen that allows the user to select the plane they will use. The user may select from three potential options as follows: A fighter Jet, A Propeller Plane, An option of your choosing.* 
+
+*Each Plane must have realistic limitations on its performance, which should also be displayed graphically on the plane selection screen.*
+
+*Once the plane is selected and the game started, there will be a dynamic number of opposing planes the user can engage in a dogfight with. There MUST be visible ammunition traces, as well as functional damage implementation for both enemy and player planes.* 
+
+*If the player defeats all enemy planes in a round, the level repeats with increased difficulty. If the player loses, the plane they are in becomes uncontrollable and falls to the ground, returning them to the home screen following a 2 second black screen.* 
+
+*You may use any library for this implementation, but it must be contained within a single script, and be able to be opened and played in the chrome browser.*"
+
+### Last Generated Code
+
+<img src="./flight-combat/by-ornith-1.0/screenshot.png" width=640>
 
 ## Tetris
 
