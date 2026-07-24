@@ -1,4 +1,4 @@
-# Notes and Comment Generating the Tetris Game
+# Notes and Comments Generating the Tetris Game
 
 ## Claude Code
 
