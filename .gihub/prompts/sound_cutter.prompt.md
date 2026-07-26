@@ -1,6 +1,6 @@
 ---
 description: Prompt to generate a Python script to cut sound sequences
-agent: plan
+agent: Plan
 tools: [execute, read, edit, search, web, agent, todo]
 ---
 - I need a new Python script in the attached folder. 

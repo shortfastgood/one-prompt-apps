@@ -1,6 +1,6 @@
 ---
 description: Python script for video resizing Prompt
-agent: plan
+agent: Plan
 tools: [execute, read, edit, search, web, agent, todo]
 ---
 - I need a new Python script in the attached folder. 
