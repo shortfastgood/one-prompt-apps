@@ -36,6 +36,10 @@ The Flight Combat example is an MVP implementation of a 3D aerial dogfighting ga
 
 <img src="./flight-combat/by-ornith-1.0/screenshot.png" width=640>
 
+#### Coding by Local LLM
+
+- [Ornith 1.0 version documentation](./flight-combat/by-ornith-1.0/README.md)
+
 ### Credits
 
 The prompt was inspired by [Bijan Bowen](https://www.youtube.com/@bijanbowen) who’s been running similar tests on YouTube.
@@ -61,6 +65,10 @@ The first model to be tested was **Qwen3-coder:30b**, made available by Alibaba.
 **June 2026**
 
 The first model found to meet the speed and quality requirements for local use was **gemma4:31b-nvfp4**. This result was achieved on a hardware and software configuration that, although fairly common, still excludes a substantial proportion of desktop and laptop systems.
+
+**July 2026**
+
+The **Ornith-1.0-35B-4bit** model produced the best overall implementation of Tetris in less than 10 minutes.
 
 ### Last Generated Code
 
