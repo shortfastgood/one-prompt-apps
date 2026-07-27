@@ -36,6 +36,10 @@ The Flight Combat example is an MVP implementation of a 3D aerial dogfighting ga
 
 <img src="./flight-combat/by-ornith-1.0/screenshot.png" width=640>
 
+### Credits
+
+The prompt was inspired by [Bijan Bowen](https://www.youtube.com/@bijanbowen) who’s been running similar tests on YouTube.
+
 ## Tetris
 
 The Tetris example is an MVP implementation of the classic block-stacking game, built to demonstrate core gameplay mechanics, playability, and prompt-driven development in a compact format. It is intended as a practical example of how a single prompt can produce a working game with only limited post-generation refinements.
@@ -105,6 +109,7 @@ The prompt was inspired by Dan Cleary (converge.run). See the related [Medium ar
 
 | Date | Description | Author |
 |---|---|---|
+| 24 july 2026 | Added Flight Combat development with local LLM (Ornith 1.0) |
 | 8 July 2026 | Moved to apps/APPLICATIONS.md file. | dden |
 | 9 June 2026 | Added Tetris development with local LLM (Gemma4 31b). | dden |
 | 26 May 2026 | Added Tetris development with local LLM (Qwen3-Coder). | dden |
