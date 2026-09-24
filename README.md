@@ -24,13 +24,13 @@ GitHub Copilot, Claude, Gemini, and Codex were used initially to establish a ref
 
 As costs rose significantly, whether through changes to GitHub Copilot's billing model or increases in input and output token usage, attention shifted towards running models locally.
 
-The hardware is a MacBook Pro M4 Max with 64 GB of memory, running the latest version of macOS. The core software stack for managing and running the models is provided by [Ollama](https://ollama.com) and [oMLX](https://omlx.ai), both of which are built on Apple's [MLX framework](https://opensource.apple.com/projects/mlx/).
+The hardware is a MacBook Pro M4 Max with 64 GB of memory, running the latest version of macOS. The core software stack for managing and running the models is provided by [Ollama](https://ollama.com), [oMLX](https://omlx.ai) and [Slotstream](https://github.com/carloslfu/slotstream), all of which are built on Apple's [MLX framework](https://opensource.apple.com/projects/mlx/).
 
-At the top of the stack, GitHub Copilot is used within VS Code alongside Claude Code. GitHub Copilot connects to Ollama through a plugin, while Claude Code is launched from the terminal via Ollama or oMLX.
+At the top of the stack, GitHub Copilot is used within VS Code alongside Claude Code. GitHub Copilot connects to Ollama through a plugin, while Claude Code is launched from the terminal via Ollama or oMLX. Slotstream is used through the VSCode Claude Code plugin.
 
 ## Methods
 
-The two target applications are **Tetris** and **Flight Combat**. Both should be recreated as they appeared on 1990s PCs, preferably as fully self-contained browser implementations.
+The three target applications are **Flight Combat**, **Tetris** and **Tower Defense**. They should be recreated as they appeared on 1990s PCs, preferably as fully self-contained browser implementations.
 
 The expectations are particularly high for a local model. It must combine strong analytical ability with the capacity to produce functional, error-free code. If those conditions are not met, the model is of limited practical use to a developer, because complex prompts, extensive checking, and costly debugging outweigh any benefit the AI might provide.
 
