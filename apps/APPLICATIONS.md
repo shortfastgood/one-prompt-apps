@@ -70,6 +70,10 @@ The first model found to meet the speed and quality requirements for local use w
 
 The **Ornith-1.0-35B-4bit** model produced the best overall implementation of Tetris in less than 10 minutes.
 
+**September 2026**
+
+The **qwen3.8-flash-next:4bit** model generated a very good and compact implementation of the game in a long run (one hour). The implementation is accurate and doesn't have any errors. The reason for the long run is the approach of the Slotstream engine, which loads only the necessary parts of the model from the disk. Here the bottleneck is the reading speed of the SSD; this approach makes it possible to run bigger models on hardware with a limited amount of RAM.
+
 ### Last Generated Code
 
 <img src="./tetris/by-sonnet/screenshot.png" width=360>
@@ -84,11 +88,12 @@ The **Ornith-1.0-35B-4bit** model produced the best overall implementation of Te
 
 - [Gemma 4 version documentation](./tetris/by-gemma4:31b-nvfp4/README.md)
 - [Qwen3-Coder version documentation](./tetris/by-qwen3-coder/README.md)
+- [Qwen3.8-flash-next version documentation](./tetris/by_qwen3.8-flash-next/README.md)
 - [Ornith 1.0 version documentation](./tetris/by-ornith-35b/README.md)
 
 ## Tower Defense
 
-The Tower Defense example is a playable browser-based MVP in which the player places and upgrades defensive towers to stop waves of enemies moving along a fixed path. It demonstrates a strong one-prompt outcome for game logic, user interaction, balancing basics, and clear visual feedback, while remaining small enough to study as a practical learning example.
+The Tower Defense example is a playable browser-based MVP in which the player places and upgrades defensive towers to stop waves of enemies moving along a fixed path. It demonstrates a strong one-prompt outcome for game logic, user interaction, basic balancing, and clear visual feedback, while remaining small enough to study as a practical learning example.
 
 ### Prompt
 
@@ -117,7 +122,8 @@ The prompt was inspired by Dan Cleary (converge.run). See the related [Medium ar
 
 | Date | Description | Author |
 |---|---|---|
-| 24 july 2026 | Added Flight Combat development with local LLM (Ornith 1.0) |
+| 24 September 2026 | Added Tetris development with local LLM (Qwen 3.8 flash next) | dden |
+| 24 July 2026 | Added Flight Combat development with local LLM (Ornith 1.0) | dden |
 | 8 July 2026 | Moved to apps/APPLICATIONS.md file. | dden |
 | 9 June 2026 | Added Tetris development with local LLM (Gemma4 31b). | dden |
 | 26 May 2026 | Added Tetris development with local LLM (Qwen3-Coder). | dden |
