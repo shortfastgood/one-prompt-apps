@@ -1,8 +1,8 @@
-# Notes and Comments Generating the Flight Combat Game
+# Notes and Comments on Generating the Flight Combat Game
 
 ## Claude Code
 
-Claude setup uses an extension of the basic rules of Andrey Karpathy and a frontend skill.
+The Claude setup uses an extension of the basic rules of Andrej Karpathy and a front-end skill.
 
 |  | Seq | Model | Publisher | Agent | Engine | Operating System 
 |--|-----|-------|-----------|-------|--------|------------------
@@ -10,4 +10,4 @@ Claude setup uses an extension of the basic rules of Andrey Karpathy and a front
 
 ### Notes:
 
-1. The prompt produced an application that can be used with a mouse, albeit with a few flaws. The corrections were made with two additional prompts. The result therefore falls within the acceptable tolerance. The game, from the poit of view of the player remains boring and hard to use eve after the corrections because the prompt lacks of some informations about the requred dynamic of this kind of games. 2026-07-24
+1. **2026-07-24** The prompt produced an application that can be used with a mouse, albeit with a few flaws. The corrections were made with two additional prompts. The result therefore falls within the acceptable tolerance. The game, from the player's point of view, remains boring and hard to use even after the corrections, because the prompt lacks some information about the required dynamics of this kind of game.
