@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Combat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="hud" class="hidden">
+    <div id="gauges" class="panel"></div>
+    <div id="hull" class="panel">HULL <div id="hullbar"><i></i></div></div>
+    <div id="threat" class="panel"></div>
+    <div id="crosshair">+</div>
+    <div id="banner"></div>
+  </div>
+
+  <div id="blackout"></div>
+
+  <div id="menu">
+    <h1>FLIGHT COMBAT</h1>
+    <p class="sub">Pick your aircraft</p>
+    <div id="cards"></div>
+    <p id="help">
+      <b>W / S</b> climb / dive &nbsp;·&nbsp; <b>A / D</b> roll (banked turns) &nbsp;·&nbsp;
+      <b>Shift</b> boost &nbsp;·&nbsp; <b>Ctrl</b> slow &nbsp;·&nbsp; <b>Space</b> fire<br />
+      Bank into a turn to actually turn — roll alone only banks you.
+    </p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="src/planes.js"></script>
+  <script src="src/render.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
