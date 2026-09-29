@@ -1,3 +1,6 @@
+# playwright
+.playwright-cli/
+
 # python
 .env/
 .venv/
