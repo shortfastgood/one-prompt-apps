@@ -27,7 +27,7 @@ This game serves as the reference implementation. Ideally, I would write the ref
 
 ## Prompt
 
-### GPT 6 Astra
+### Frontier Model Prompt
 
 *Design and create flight combat simulator game. The game must feature 3d graphics in any style you choose.*
 
@@ -43,7 +43,7 @@ This game serves as the reference implementation. Ideally, I would write the ref
 
 *Place the code in the folder ./apps/flight-combat/by-codex-gpt-6/*
 
-### Local Model
+### Enhancements Prompt
 
 *Design and create flight combat simulator game. The game must feature 3d graphics in any style you choose.*
 
@@ -55,11 +55,13 @@ This game serves as the reference implementation. Ideally, I would write the ref
 
 *If the player defeats all enemy planes in a round, the level repeats with increased difficulty. If the player loses, the plane they are in becomes uncontrollable and falls to the ground, returning them to the home screen following a 2 second black screen.*
 
-*The game in apps/flight-combat/by-codex-gpt-6 is the reference implementation. I expect you to study it carefully to understand the structure and functionality, but all new code must be written from scratch. I expect a reimplementation plan to be created before any coding begins. I expect a detailed outline of the new implementation, including module structure, key algorithms, and any deviations from the reference implementation, before any coding starts.*
+*There is already a very good implementation of the game available for reference in the folder apps/flight-combat/by-codex-gpt-6. Your task is to provide a new implementation having unique design choices and improvements while maintaining the core gameplay mechanics. Do not re-invent or change usable code from the reference implementation.*
 
-*You should apply some variation and creativity in the design and implementation of the game, while still adhering to the core mechanics and structure outlined in the reference implementation.*
+*A very important aspect is the graphics quality and visual fidelity, which should be carefully considered and implemented to enhance the overall gaming experience.*
 
-*I expect all new code to be thoroughly tested and documented. Each module should include clear comments explaining its purpose and functionality. Additionally, any deviations from the reference implementation should be justified and documented.*
+*Provide a detailed plan for the new implementation, including the overall architecture, key modules, and any unique features or improvements you intend to introduce. Proceed with small, incremental steps, ensuring each part is well-designed and tested before moving on to the next.*
+
+*Do not proceed with implementation until a detailed plan has been created and approved.*
 
 *Place the code in the folder ./apps/flight-combat/by-\<model name>/*
 
