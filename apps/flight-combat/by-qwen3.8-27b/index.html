@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10191c">
+  <meta name="description" content="An offline 3D flight combat game. Choose your aircraft and defend the archipelago.">
+  <title>NIGHT PATROL — Flight combat</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <canvas id="world" aria-label="3D aircraft and combat view"></canvas>
+  <div id="hangar">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Night Patrol home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 28 26 16 21 4 26Z"/><path d="M16 11v10"/></svg>NIGHT PATROL<span>FLIGHT COMBAT</span></a>
+      <div class="top-meta"><i></i> SYSTEMS ONLINE <span>OFFLINE READY</span></div>
+      <button id="help" class="icon-button" aria-label="Open flight controls">?</button>
+    </header>
+    <main class="hangar-main">
+      <section class="showcase" aria-label="Aircraft preview">
+        <div class="eyebrow"><span class="line"></span> HANGAR / AIRCRAFT SELECTION</div>
+        <h1>Own the sky.</h1>
+        <p class="intro">Choose your aircraft. Make every sortie count.</p>
+        <div class="model-caption"><span id="preview-code">F / 01</span><div><b id="preview-name">PEREGRINE</b><span>LIVE AIRFRAME PREVIEW <i>↻</i></span></div></div>
+        <span class="stage-coordinate">48° 12′ N &nbsp; 16° 22′ E</span>
+        <div class="stage-label"><span>01 — 03</span><span>READY FOR DEPLOYMENT</span></div>
+      </section>
+      <aside class="specs">
+        <div class="eyebrow"><span id="class-label">MULTIROLE FIGHTER</span><span id="spec-index">01 / 03</span></div>
+        <h2 id="plane-name">Peregrine <span>F-16</span></h2>
+        <div class="role-tags" id="role-tags"></div>
+        <p id="plane-description"></p>
+        <div class="performance" id="performance"></div>
+        <div class="flight-envelope"><span>FLIGHT ENVELOPE</span><p id="plane-limits"></p></div>
+        <button id="launch" class="launch">Launch sortie <span>↗</span></button>
+        <div class="launch-note"><span class="pulse-dot"></span> OPERATION: OVERNIGHT SQUADRON</div>
+      </aside>
+      <div class="aircraft-list" role="group" aria-label="Choose your aircraft"></div>
+    </main>
+    <footer class="hangar-footer"><span>THE ARCHIPELAGO <i>/</i> ENDLESS DOGFIGHT</span><button id="controls-link">Flight controls <span>↗</span></button><span class="keyboard-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> FLY <span>·</span> <kbd>SPACE</kbd> FIRE</span></footer>
+    <div id="debrief" role="status"></div>
+  </div>
+
+  <div id="hud" hidden>
+    <div class="hud-top"><div class="hud-brand">NIGHT PATROL<span id="hud-plane">PEREGRINE</span></div><div class="mission"><span>OPERATION OVERNIGHT SQUADRON</span><strong>WAVE <b id="wave">01</b><i></i><b id="hostiles">3</b> HOSTILES</strong></div><button id="pause-button" class="hud-button" aria-label="Pause game">Ⅱ</button></div>
+    <div id="targets"></div>
+    <div class="reticle"><span></span><i></i><b></b></div>
+    <div id="hit-marker">×</div>
+    <div id="notice" role="status"></div>
+    <div id="warning"></div>
+    <div class="hud-bottom">
+      <div class="flight-readout"><div><span>AIRSPEED</span><strong id="speed">0</strong><small>KM/H</small></div><div><span>ALTITUDE</span><strong id="altitude">0</strong><small>M AGL</small></div><div><span>THROTTLE</span><strong id="throttle">75</strong><small>%</small></div></div>
+      <div class="radar-wrap"><canvas id="radar" width="240" height="240" aria-label="Enemy radar"></canvas><span>RADAR / 4 KM</span></div>
+      <div class="combat-readout"><div class="hull-label"><span>NIGHT PATROL</span><b id="hull-number">100%</b></div><div class="hull-track"><i id="hull-bar"></i></div><div class="hull-label heat-label"><span>CANNON TEMP</span><b id="heat-number">READY</b></div><div class="heat-track"><i id="heat-bar"></i></div><div class="hull-label boost-label" id="boost-label" hidden><span>BOOSTER</span><b id="boost-number">100%</b></div><div class="heat-track boost-track" id="boost-track" hidden><i id="boost-bar"></i></div><div class="kill-count"><span>CONFIRMED KILLS</span><b id="kills">00</b></div></div>
+    </div>
+    <div class="game-hints">MOUSE / WASD <span>FLY</span> &nbsp; Q / E <span>THROTTLE</span> &nbsp; SPACE / CLICK <span>FIRE</span> &nbsp; SHIFT <span>BOOST</span> &nbsp; ESC <span>PAUSE</span></div>
+    <div id="touch-controls"><div id="stick"><i></i></div><div class="touch-actions"><button id="touch-boost">BOOST</button><button id="touch-fire">FIRE</button></div></div>
+    <div id="damage-vignette"></div>
+  </div>
+
+  <dialog id="controls-dialog"><button class="dialog-close" aria-label="Close controls">×</button><div class="eyebrow">PRE-FLIGHT BRIEFING</div><h2>Take control.</h2><p>Keep the enemy in your sights. Lead moving targets and fire in short bursts.</p><dl><div><dt><kbd>W</kbd> / <kbd>↑</kbd></dt><dd>Pitch up</dd></div><div><dt><kbd>S</kbd> / <kbd>↓</kbd></dt><dd>Pitch down</dd></div><div><dt><kbd>A</kbd> <kbd>D</kbd> / <kbd>←</kbd> <kbd>→</kbd></dt><dd>Bank and turn</dd></div><div><dt><kbd>Q</kbd> / <kbd>E</kbd></dt><dd>Decrease / increase throttle</dd></div><div><dt><kbd>SPACE</kbd> / click</dt><dd>Fire cannons</dd></div><div><dt><kbd>SHIFT</kbd></dt><dd>Burn booster reserve (interceptor only)</dd></div><div><dt><kbd>ESC</kbd></dt><dd>Pause / resume</dd></div></dl><p class="briefing-note">Or move your mouse to steer. Use the touch stick and FIRE button on a touch screen. Low speed causes a stall; steep climbs bleed airspeed. Cannons overheat under continuous fire. Clear a wave to repair and face a stronger squadron.</p><button class="launch dialog-close-action">Understood <span>↗</span></button></dialog>
+  <dialog id="pause-dialog"><div class="eyebrow">SORTIE ON HOLD</div><h2>Catch your breath.</h2><p>The skies can wait.</p><button id="resume" class="launch">Resume flight <span>↗</span></button><button id="return-hangar" class="secondary-button">Return to hangar</button></dialog>
+  <div id="blackout" hidden></div>
+  <div id="graphics-error" hidden><h2>WebGL is unavailable</h2><p>Enable hardware acceleration or open this game in a browser with WebGL support.</p></div>
+  <script src="./engine.js"></script>
+  <script src="./simulation.js"></script>
+  <script src="./game.js"></script>
+</body>
+</html>
