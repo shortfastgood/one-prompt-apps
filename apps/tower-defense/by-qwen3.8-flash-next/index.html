@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tower Defense</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="hud">
+    <span>Wave <b id="wave">1/12</b></span>
+    <span>Lives <b id="lives">20</b></span>
+    <span>Money <b id="money">$120</b></span>
+    <button id="start">Start Wave</button>
+    <button id="speed">Speed 1x</button>
+    <button id="pause">Pause</button>
+    <button id="restart">Restart</button>
+  </header>
+  <main>
+    <canvas id="game" width="800" height="520"></canvas>
+    <aside id="panel">
+      <h2>Build</h2>
+      <div id="shop"></div>
+      <h2>Selection</h2>
+      <div id="info"><p>Select a tower to build, or click a placed tower.</p></div>
+    </aside>
+  </main>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

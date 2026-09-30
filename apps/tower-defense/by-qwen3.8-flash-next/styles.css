@@ -1,0 +1,109 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: #020617;
+  color: #e2e8f0;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+#hud {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+#hud span b {
+  color: #f8fafc;
+}
+
+button {
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+button:hover:not(:disabled) {
+  background: #334155;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+main {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+canvas {
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+}
+
+#panel {
+  width: 230px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+#panel h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin: 12px 0 6px;
+}
+
+#panel h2:first-child {
+  margin-top: 0;
+}
+
+#panel p {
+  margin: 6px 0;
+}
+
+#panel .row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.shop-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.shop-btn.active {
+  outline: 2px solid #38bdf8;
+}
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

@@ -1,5 +1,8 @@
 # Tetris — by qwen3.8-flash-next
 
+<img src="screenshot.png" width=960>
+
+
 A playable, modular Tetris implementation. No build step, no dependencies.
 
 ## Play
