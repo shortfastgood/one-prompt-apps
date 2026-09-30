@@ -31,10 +31,10 @@ The Claude setup uses an extension of the basic rules of Andrej Karpathy and a f
 
 The Copilot setup uses a trivial set of instructions. The version of GitHub Copilot corresponds to the version of VSCode.
 
-|  | Seq | Model | Publisher | Agent | Engine | Operating System 
-|--|-----|-------|-----------|-------|--------|------------------
-| <span style="color: red;">&#10007;</span> | 1 | Qwen3.8-27b-mlx | Alibaba | GitHub Copilot | Ollama 0.34.4 | macOS Tahoe 26.6.2
-| <span style="color: green;">&#10003;</span> | 2 | Qwen3.8-27b-mlx | Alibaba | GitHub Copilot | Ollama 0.34.4 | macOS Tahoe 26.6.2
+|  | Seq | Model | Publisher | Agent | Engine | Operating System | Prompt |
+|--|-----|-------|-----------|-------|--------|------------------|--------|
+| <span style="color: red;">&#10007;</span> | 1 | Qwen3.8-27b-mlx | Alibaba | GitHub Copilot | Ollama 0.34.4 | macOS Tahoe 26.6.2 | frontier |
+| <span style="color: green;">&#10003;</span> | 2 | Qwen3.8-27b-mlx | Alibaba | GitHub Copilot | Ollama 0.34.4 | macOS Tahoe 26.6.2 | enhancement |
 
 ### Notes:
 

@@ -72,6 +72,7 @@ This game serves as the reference implementation. Ideally, I would write the ref
 ### Documentation
 
 - [GPT 6 Astra version documentation](./by-codex-gpt-6/README.md)
+- [Qwen 3.8 27b MLX](by-qwen3.8-27b/README.md)
 
 ### Credits
 
@@ -82,4 +83,5 @@ The prompt was inspired by [Bijan Bowen](https://www.youtube.com/@bijanbowen) wh
 | Date | Author | Description |
 |------|--------|-------------|
 | 2026-09-27 | Daniele Denti | New approach with reference implementation |
+| 2026-09-29 | Daniele Denti | Revised documentantion and comments, enhanced application |
 
