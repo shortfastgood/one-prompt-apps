@@ -6,6 +6,10 @@
   - [Prompt](./flight-combat/FLIGHT-COMBAT-APPLICATION.md#prompt)
   - [Preview](./flight-combat/FLIGHT-COMBAT-APPLICATION.md#preview)
   - [Comments](./flight-combat/COMMENTS.md)
+- [Pac-Man](./pac-man/PAC-MAN-APPLICATION.md)
+  - [Approach](./pac-man/PAC-MAN-APPLICATION.md#approach)
+  - [Prompt](./pac-man/PAC-MAN-APPLICATION.md#prompt)
+  - [Preview](./pac-man/PAC-MAN-APPLICATION.md#preview)
 - [Tetris](#tetris)
   - [Prompt](#prompt-1)
   - [Generation History](#generation-history)
@@ -66,6 +70,7 @@ The **qwen3.8-flash-next:4bit** model generated a very good and compact implemen
 
 | Date | Description | Author |
 |---|---|---|
+| 5 October 2026 | Pac Man application reference implementation | Daniele Denti |
 | 30 September 2026 | Flight Combat and Tower Defense moved to dedicated files | Daniele Denti |
 | 24 September 2026 | Added Tetris development with local LLM (Qwen 3.8 flash next) | Daniele Denti |
 | 24 July 2026 | Added Flight Combat development with local LLM (Ornith 1.0) | dden |
