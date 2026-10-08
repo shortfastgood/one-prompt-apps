@@ -12,7 +12,8 @@ The detailed prompt is [here](../../prompts/pacman.prompt.md)
 
 ## Generation History
 
-The reference implementation was done first using Codex GPT-6 Astra and finished by GitHub Copilot and Claude Sonnet 5.5 due to an outage of Codex.
+**September 2026** The reference implementation was done first using Codex GPT-6 Astra and finished by GitHub Copilot.
+**October 2026** The implementation was split in two phases, code generation and test generation, using different sessions.
 
 
 ## Preview
