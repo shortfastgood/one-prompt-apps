@@ -1,0 +1,24 @@
+{
+  "name": "one-prompt-apps",
+  "version": "1.0.0",
+  "description": "The project's original purpose was to assess and demonstrate the practical capabilities of a large language model and its execution environment. By mid-2026, technical progress had made it possible to extend these assessments to several models that can run entirely on a laptop. This development protects intellectual property and removes dependence on major providers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shortfastgood/one-prompt-apps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shortfastgood/one-prompt-apps/issues"
+  },
+  "homepage": "https://github.com/shortfastgood/one-prompt-apps#readme",
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  }
+}
