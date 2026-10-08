@@ -115,16 +115,12 @@ Render in this order: black background, maze, player, ghosts in list order, scor
 - On game over with lives > 0, draw yellow `You Win! Press SPACE to restart` at `(300, 400)`.
 - Use those fixed message coordinates, not measured text centering. Leave the board visible with no modal or dimming layer.
 
-## Verification before delivery
+## Verification handoff and delivery
 
-Check that the file opens offline without console errors or network requests. Verify normal play and use temporary controlled maze/state setups to check rare cases; remove debugging controls before delivery:
+Defer verification to a separate session using a different model from the one that implemented the game. Do not generate or run the verification suite or perform browser verification in the implementation session. The dedicated `prompts/pacman.verification.prompt.md` supersedes the former in-session verification checklist.
 
-- Across many generated mazes and restarts, flood-fill from the player spawn and verify every floor cell and collectible outside the ghost house is reachable, the house always has the exact specified layout and is unreachable, the surrounding ring contains no walls, both exit cells are reachable, and boundary walls remain intact. Also verify board dimensions, empty player spawn, entity colors and positions, draw order, HUD, and mouth timing.
-- A fresh arrow press into an open cell moves one cell at once and then continues every 10 ticks until a wall is hit, where the player stops; a press in a different open direction turns immediately; a blocked press changes nothing; pressing the current heading again or holding a key (repeat keydown) causes no extra movement. Holding an arrow through restart does not move the player. Browser scrolling is suppressed and queued input is cleared on blur.
-- Dots score 10, pellets score 50, eaten ghosts score 200, and consumed collectibles disappear. Power refreshes on another pellet and expires after its tick countdown.
-- Ghosts advance once per 15 ticks, continue straight until blocked, can reverse when blocked, and remain stationary when trapped. Powered ghosts keep their normal movement behavior.
-- At startup the red ghost is at `(14, 7)` and the others wait in the house; pink, cyan, orange, green, and violet jump out to `(14, 7)` at 900, 1800, 2700, 3600, and 4500 ticks, and released ghosts never re-enter the house. Powered collisions immediately respawn the same-colored ghost in its house slot with a 900-tick wait. Unpowered collisions decrement lives, reset the player, and restore all ghosts to their initial positions and release schedule. Cell swaps and intermediate movement positions do not cause collisions.
-- Clearing all collectibles wins; exhausting lives loses. Both endings freeze simulation and display the correct text. Space fully resets only after an ending. Escape stops the game.
-- Simulation timing is consistent across display refresh rates, and returning from a hidden tab does not fast-forward the game.
+Deliver the implemented `index.html` and brief instructions to open it and use arrows, Space after an ending, and Escape. State clearly that verification is pending; do not claim the implementation has passed tests.
 
-Deliver the working file and brief instructions to open it and use arrows, Space after an ending, and Escape. Report what you actually verified and any unavailable browser checks. Do not require the user to supply assets, references, or missing gameplay decisions.
+In the final response, instruct the caller to start a new session, select a different model, and execute `prompts/pacman.verification.prompt.md` against the delivered HTML. Include the exact path to the delivered HTML and a link or path to the verification prompt so the caller can provide both to that session. The verification session should generate or update the test suite, run it, correct any errors, and report the results and any skipped or unavailable checks.
+
+Do not require the user to supply assets, references, or missing gameplay decisions.
