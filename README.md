@@ -1,6 +1,6 @@
 # One Prompt Applications
 
-The project's original purpose was to assess and demonstrate the practical capabilities of a large language model and its execution environment. By mid-2026, technical progress had made it possible to extend these assessments to several models that can run entirely on a laptop. This development protects intellectual property and removes dependence on major providers.
+This project started as a way to test how far a large language model, and the environment running it, could actually get. By mid-2026 things had changed: several models now run entirely on a laptop, which matters for two reasons. It keeps the work, and the code it produces, on your own machine, and it ends the dependence on a handful of cloud providers.
 
 ## Table of Contents
 
@@ -13,35 +13,41 @@ The project's original purpose was to assess and demonstrate the practical capab
 
 ## Base Rule
 
-A single-prompt application is a minimum viable product (MVP) that meets the essential requirements of its category. The application must be fully functional and fit for purpose. To avoid rejecting strong implementations because of minor defects, an application that requires one or two additional prompts to become fully functional is still considered valid, provided those prompts are used to correct the code rather than extend it.
+A single-prompt application is an MVP for its category: it does the essential job and is actually usable. I allow one or two follow-up prompts, but only to *fix* the code, not to add to it. Otherwise the bar drops and weak implementations slip through.
 
 ## Scope
 
-Each application in this repository is a small, self-contained project designed to demonstrate how far a single well-written prompt can go in producing usable software. The examples cover practical logic, interface behaviour, and core features, making the collection useful both as a showcase and as a learning resource for AI-driven development and publishing.
+Every app here is a small, self-contained project meant to show how far one well-written prompt can carry you. They cover the practical bits (game logic, interface, and core features), so the collection works both as a showcase and as something you can learn from.
 
-At a technical level, the aim is to evaluate the approaches used in different model execution environments and assess the differences between a large, remotely hosted model and one running on local hardware.
+Underneath that, I'm really comparing two things: the approaches used by different model runtimes, and the gap between a big remote model and one running locally.
 
 ## Tools
 
-GitHub Copilot, Claude, Gemini, and Codex were used initially to establish a reference point and validate the prompts. The underlying assumption was straightforward: if a model with virtually unlimited resources cannot produce a usable result, the prompt is poorly formulated.
+I started with GitHub Copilot, Claude, Gemini, and Codex to get a reference point and check that the prompts were any good. The logic is simple: if a model with effectively unlimited resources can't produce something usable, the prompt is the problem, not the model.
 
-As costs rose significantly, whether through changes to GitHub Copilot's billing model or increases in input and output token usage, attention shifted towards running models locally.
+Then the cost shot up (first through Copilot's billing changes, then through higher token usage), and the focus moved to running models locally.
 
-The hardware is a MacBook Pro M4 Max with 64 GB of memory, running the latest version of macOS. The core software stack for managing and running the models is provided by [Ollama](https://ollama.com), [oMLX](https://omlx.ai) and [Slotstream](https://github.com/carloslfu/slotstream), all of which are built on Apple's [MLX framework](https://opensource.apple.com/projects/mlx/).
+The hardware is a MacBook Pro M4 Max, 64 GB, latest macOS. The stack for running the models is [Ollama](https://ollama.com), [oMLX](https://omlx.ai), and [Slotstream](https://github.com/carloslfu/slotstream), all built on Apple's [MLX](https://opensource.apple.com/projects/mlx/).
 
-Ollama and oMLX load the entire model into memory, so the available memory capacity constrains model selection. Slotstream uses disk storage to extend the available memory capacity. With this approach, the model should use a mixture-of-experts (MoE) architecture, and performance is constrained by disk read throughput.
+Ollama and oMLX load the whole model into memory, so memory size limits your choice of model. Slotstream uses the disk to extend that, so you want a mixture-of-experts (MoE) model here, and now the limit is disk read speed.
 
-At the top of the stack, GitHub Copilot is used within VS Code alongside Claude Code. GitHub Copilot connects to Ollama through a plugin, while Claude Code is launched from the terminal via Ollama or oMLX. Slotstream is used through the Claude Code extension for VS Code.
+At the top, I use GitHub Copilot inside VS Code next to Claude Code. Copilot reaches Ollama through a plugin; Claude Code runs from the terminal over Ollama or oMLX. Slotstream goes through the Claude Code VS Code extension.
 
 ## Methods
 
-The three target applications are **Flight Combat**, **Tetris** and **Tower Defense**. They should be recreated in the style of 1990s PC games, preferably as fully self-contained browser implementations.
+The four targets are **Flight Combat**, **PacMan**, **Tetris**, and **Tower Defense**, each rebuilt in the style of a 1990s PC game, ideally as a fully self-contained browser implementation.
 
-The expectations are particularly high for a local model. It must combine strong analytical ability with the capacity to produce functional, error-free code. If those conditions are not met, the model is of limited practical use to a developer, because complex prompts, extensive checking, and costly debugging outweigh any benefit the AI might provide.
+The bar is high, especially for a local model. It needs to reason well *and* produce code that runs without errors. If it can't do that, it's not worth much to a developer: the complex prompting, the checking, and the debugging end up costing more than the model saves.
 
-Early tests have already shown that many local models do not meet this benchmark. The main reason is their reliance on vibe coding: a single prompt describes the product in much the same way a human programmer would be briefed. At least one local model, however, already shows the required qualities.
+Early tests already showed that many local models fail this. The usual cause is "vibe coding": one prompt describes the product the way you'd brief a human. At least one local model, though, already pulls it off.
 
-Vibe coding should not be used as the direct route to producing code or automation. An explicit planning phase is more effective, as it provides greater control over the code generation process. Where available, the agent's planning function should be used; otherwise, the plan can be written out explicitly. This quickly produces a set of instructions to guide generation and broadens the range of models that remain useful, including those that run on more limited hardware.
+That said, vibe coding shouldn't be the direct route to code or automation. A planning step works better, because it gives you more control. Use the agent's planning feature where you have one; if not, write the plan out by hand. Either way you end up with a set of instructions to steer generation, and it widens the range of models that are still usable, including the ones running on weaker hardware.
+
+## Lessons Learned
+
+**October 2026.** After several sessions trying different approaches, one thing stood out: every model I tested, without one exception, had trouble writing verification code and burned a lot of time setting up tests. None produced a real test suite with measurable coverage, even when I asked for it.
+
+So, starting with PacMan, I stopped asking the implementation prompt to verify itself and split the job: a second prompt, written and structured only for testing, runs in a separate session, optionally on a different model. First results with a frontier model were great, and because the suite is separate, you can rerun it after each change to catch regressions and side effects.
 
 ## References
 
