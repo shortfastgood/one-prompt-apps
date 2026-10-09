@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pac-Man</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; }
+  canvas { max-width: 100vw; max-height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="game" width="1200" height="800"></canvas>
+<script>
+"use strict";
+
+// ---------- constants ----------
+const COLS = 30, ROWS = 20, CELL = 40;
+const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+const GHOST_DEFS = [
+  { color: '#ff0000', pos: { x: 14, y: 7 },  slot: { x: 12, y: 10 }, delay: null }, // red: outside door
+  { color: '#ffc0cb', pos: { x: 13, y: 10 }, slot: { x: 13, y: 10 }, delay: 900 },
+  { color: '#00ffff', pos: { x: 14, y: 10 }, slot: { x: 14, y: 10 }, delay: 1800 },
+  { color: '#ffa500', pos: { x: 15, y: 10 }, slot: { x: 15, y: 10 }, delay: 2700 },
+  { color: '#00ff00', pos: { x: 16, y: 10 }, slot: { x: 16, y: 10 }, delay: 3600 },
+  { color: '#9b30ff', pos: { x: 17, y: 10 }, slot: { x: 17, y: 10 }, delay: 4500 },
+];
+
+// mouth-open sector per facing direction, as [startDeg, endDeg] (mathematical angles)
+const SECTORS = { '1,0': [30, 330], '-1,0': [150, 210], '0,-1': [60, 120], '0,1': [240, 300] };
+
+// ---------- state ----------
+let maze, player, ghosts, score, lives, gameOver, stopped, queue;
+
+function inHouse(x, y) { return x >= 11 && x <= 18 && y >= 8 && y <= 11; }
+function inRing(x, y) { return x >= 10 && x <= 19 && y >= 7 && y <= 12 && !inHouse(x, y); }
+function blocked(v) { return v === 1 || v === 4; } // walls and the door are not walkable
+
+// ---------- maze generation ----------
+function genMaze() {
+  const m = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  for (let x = 0; x < COLS; x++) { m[0][x] = 1; m[ROWS - 1][x] = 1; }
+  for (let y = 0; y < ROWS; y++) { m[y][0] = 1; m[y][COLS - 1] = 1; }
+  // ghost house: all walls, interior floor, two door cells
+  for (let y = 8; y <= 11; y++) for (let x = 11; x <= 18; x++) m[y][x] = 1;
+  for (let y = 9; y <= 10; y++) for (let x = 12; x <= 17; x++) m[y][x] = 0;
+  m[8][14] = 4; m[8][15] = 4;
+  // random walls / dots / pellets
+  for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+    if (x === 0 || y === 0 || x === COLS - 1 || y === ROWS - 1) continue; // boundary walls
+    if (inHouse(x, y)) continue;                                           // house assigned above
+    if (x === 1 && y === 1) continue;                                      // forced empty below
+    if (inRing(x, y)) { m[y][x] = Math.random() < 0.1 ? 3 : 2; continue; } // ring: never a wall
+    if (Math.random() < 0.2) { m[y][x] = 1; continue; }
+    m[y][x] = Math.random() < 0.1 ? 3 : 2;
+  }
+  m[1][1] = 0;
+  fixConnectivity(m);
+  return m;
+}
+
+function floodFill(m) { // walkable cells reachable from the player spawn (1,1)
+  const seen = new Set([COLS + 1]);
+  const stack = [[1, 1]];
+  while (stack.length) {
+    const [x, y] = stack.pop();
+    for (const [dx, dy] of DIRS) {
+      const nx = x + dx, ny = y + dy;
+      if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
+      if (blocked(m[ny][nx])) continue;
+      const k = ny * COLS + nx;
+      if (!seen.has(k)) { seen.add(k); stack.push([nx, ny]); }
+    }
+  }
+  return seen;
+}
+
+function bfsPath(m, start, reached) { // shortest path through walls and floor alike
+  const prev = new Map([[start.y * COLS + start.x, null]]);
+  const q = [[start.x, start.y]];
+  for (let i = 0; i < q.length; i++) {
+    const [x, y] = q[i];
+    if (reached.has(y * COLS + x)) {
+      const path = [];
+      let k = y * COLS + x;
+      while (k !== null) { path.push({ x: k % COLS, y: Math.floor(k / COLS) }); k = prev.get(k); }
+      return path;
+    }
+    for (const [dx, dy] of DIRS) {
+      const nx = x + dx, ny = y + dy;
+      if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
+      if (inHouse(nx, ny)) continue; // never carve ghost-house cells
+      const k = ny * COLS + nx;
+      if (!prev.has(k)) { prev.set(k, y * COLS + x); q.push([nx, ny]); }
+    }
+  }
+  return [];
+}
+
+function fixConnectivity(m) {
+  for (;;) {
+    const reached = floodFill(m);
+    let start = null;
+    outer:
+    for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+      if (!inHouse(x, y) && !blocked(m[y][x]) && !reached.has(y * COLS + x)) { start = { x, y }; break outer; }
+    }
+    if (!start) return;
+    for (const c of bfsPath(m, start, reached)) if (m[c.y][c.x] === 1) m[c.y][c.x] = 2;
+  }
+}
+
+// ---------- setup / reset ----------
+function resetGame() {
+  maze = genMaze();
+  score = 0; lives = 3; gameOver = false; stopped = false; queue = [];
+  player = { x: 1, y: 1, dir: [1, 0], timer: 0, mouthOpen: true, mouthTimer: 0, powered: false, powerTimer: 0 };
+  ghosts = GHOST_DEFS.map(d => ({
+    def: d, x: d.pos.x, y: d.pos.y,
+    dir: DIRS[Math.floor(Math.random() * 4)], timer: 0,
+    waiting: d.delay === null ? null : d.delay,
+  }));
+}
+
+function resetPositions() { // death: restore initial positions/schedule, keep dir/timers
+  player.x = 1; player.y = 1;
+  for (const g of ghosts) {
+    g.x = g.def.pos.x; g.y = g.def.pos.y;
+    g.waiting = g.def.delay === null ? null : g.def.delay;
+  }
+}
+
+function respawnGhost(g) { // eaten: new ghost of same colour in the house slot
+  const i = ghosts.indexOf(g);
+  if (i >= 0) ghosts.splice(i, 1);
+  ghosts.push({
+    def: g.def, x: g.def.slot.x, y: g.def.slot.y,
+    dir: DIRS[Math.floor(Math.random() * 4)], timer: 0, waiting: 900,
+  });
+}
+
+// ---------- simulation ----------
+function step() {
+  // event phase: queued presses in arrival order
+  while (queue.length) {
+    const ev = queue.shift();
+    if (ev.type === 'escape') { stopped = true; queue.length = 0; return; }
+    if (ev.type === 'restart') { if (gameOver) resetGame(); }
+    else if (!gameOver) {
+      const [dx, dy] = ev.dir;
+      if (!player.dir || player.dir[0] !== dx || player.dir[1] !== dy) {
+        const nx = player.x + dx, ny = player.y + dy;
+        if (!blocked(maze[ny][nx])) { player.x = nx; player.y = ny; player.dir = ev.dir; player.timer = 0; }
+      }
+    }
+  }
+  if (gameOver) return;
+
+  // continuous player movement (10 ticks per cell)
+  if (player.dir) {
+    player.timer++;
+    if (player.timer >= 10) {
+      player.timer = 0;
+      const [dx, dy] = player.dir;
+      const nx = player.x + dx, ny = player.y + dy;
+      if (!blocked(maze[ny][nx])) {
+        player.x = nx; player.y = ny;
+        const v = maze[ny][nx];
+        if (v === 2) { maze[ny][nx] = 0; score += 10; }
+        else if (v === 3) { maze[ny][nx] = 0; score += 50; player.powered = true; player.powerTimer = 300; }
+      } else player.dir = null; // wall ahead: stand still until next steer
+    }
+  }
+
+  // 1. mouth animation, then power timer
+  player.mouthTimer++;
+  if (player.mouthTimer >= 10) { player.mouthTimer = 0; player.mouthOpen = !player.mouthOpen; }
+  if (player.powered) { player.powerTimer--; if (player.powerTimer <= 0) player.powered = false; }
+
+  // 2. ghost movement (15 ticks per cell; random turn only when blocked)
+  for (const g of ghosts) {
+    if (g.waiting !== null) {
+      g.waiting--;
+      if (g.waiting === 0) { g.waiting = null; g.x = 14; g.y = 7; g.timer = 0; } // jump out, keep dir
+      continue;
+    }
+    g.timer++;
+    if (g.timer >= 15) {
+      g.timer = 0;
+      const [dx, dy] = g.dir;
+      const nx = g.x + dx, ny = g.y + dy;
+      if (nx >= 0 && ny >= 0 && nx < COLS && ny < ROWS && !blocked(maze[ny][nx])) {
+        g.x = nx; g.y = ny; // continue straight
+      } else {
+        const opts = DIRS.filter(([ox, oy]) => {
+          const px = g.x + ox, py = g.y + oy;
+          return px >= 0 && py >= 0 && px < COLS && py < ROWS && !blocked(maze[py][px]);
+        });
+        if (opts.length) { const d = opts[Math.floor(Math.random() * opts.length)]; g.dir = d; g.x += d[0]; g.y += d[1]; }
+      }
+    }
+  }
+
+  // 3. collisions against a shallow snapshot, no early break
+  for (const g of ghosts.slice()) {
+    if (g.x === player.x && g.y === player.y) {
+      if (player.powered) { score += 200; respawnGhost(g); }
+      else {
+        lives--;
+        if (lives <= 0) gameOver = true;
+        else resetPositions();
+      }
+    }
+  }
+
+  // 4. win check
+  if (!gameOver) {
+    let any = false;
+    outer:
+    for (const row of maze) for (const v of row) if (v === 2 || v === 3) { any = true; break outer; }
+    if (!any) gameOver = true;
+  }
+}
+
+// ---------- rendering ----------
+function drawPlayer() {
+  const cx = player.x * CELL + 20, cy = player.y * CELL + 20;
+  ctx.fillStyle = '#ffff00';
+  const key = player.dir ? player.dir.join(',') : null;
+  if (!key || !player.mouthOpen) { ctx.beginPath(); ctx.arc(cx, cy, 18, 0, 2 * Math.PI); ctx.fill(); return; }
+  const [s, e] = SECTORS[key];
+  const a0 = -s * Math.PI / 180, a1 = -e * Math.PI / 180;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + 18 * Math.cos(a0), cy + 18 * Math.sin(a0));
+  ctx.arc(cx, cy, 18, a0, a1, true);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawGhost(g) {
+  const cx = g.x * CELL + 20, cy = g.y * CELL + 20;
+  ctx.fillStyle = player.powered ? '#0000ff' : g.def.color;
+  ctx.beginPath(); ctx.arc(cx, cy, 18, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillRect(cx - 18, cy, 36, 18);
+  for (const ox of [-9, 0, 9]) { ctx.beginPath(); ctx.arc(cx + ox, cy + 18, 6, 0, 2 * Math.PI); ctx.fill(); }
+  ctx.fillStyle = '#ffffff';
+  for (const ox of [-6, 6]) { ctx.beginPath(); ctx.arc(cx + ox, cy - 6, 6, 0, 2 * Math.PI); ctx.fill(); }
+  ctx.fillStyle = '#000000';
+  const ox = Math.floor(g.dir[0] * 3 / 2), oy = Math.floor(g.dir[1] * 3 / 2);
+  for (const ex of [-6, 6]) { ctx.beginPath(); ctx.arc(cx + ex + ox, cy - 6 + oy, 3, 0, 2 * Math.PI); ctx.fill(); }
+}
+
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+function render() {
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, 1200, 800);
+  for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+    const v = maze[y][x], px = x * CELL, py = y * CELL;
+    if (v === 1) { ctx.fillStyle = '#0000ff'; ctx.fillRect(px, py, CELL, CELL); }
+    else if (v === 4) {
+      ctx.fillStyle = '#000000'; ctx.fillRect(px, py, CELL, CELL);
+      ctx.fillStyle = '#ffb8de'; ctx.fillRect(px, py + 16, CELL, 8);
+    } else if (v === 2) {
+      ctx.fillStyle = '#000000'; ctx.fillRect(px, py, CELL, CELL);
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(px + 18, py + 18, 4, 4);
+    } else if (v === 3) {
+      ctx.fillStyle = '#000000'; ctx.fillRect(px, py, CELL, CELL);
+      ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(px + 20, py + 20, 8, 0, 2 * Math.PI); ctx.fill();
+    }
+  }
+  drawPlayer();
+  for (const g of ghosts) drawGhost(g);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '36px sans-serif';
+  ctx.textBaseline = 'top';
+  ctx.textAlign = 'left';
+  ctx.fillText('Score: ' + score, 10, 10);
+  ctx.textAlign = 'right';
+  ctx.fillText('Lives: ' + lives, 1190, 10);
+  if (gameOver) {
+    ctx.textAlign = 'left';
+    if (lives <= 0) { ctx.fillStyle = '#ff0000'; ctx.fillText('Game Over! Press SPACE to restart', 300, 400); }
+    else { ctx.fillStyle = '#ffff00'; ctx.fillText('You Win! Press SPACE to restart', 300, 400); }
+  }
+}
+
+// ---------- input ----------
+const ARROWS = { ArrowRight: [1, 0], ArrowLeft: [-1, 0], ArrowDown: [0, 1], ArrowUp: [0, -1] };
+window.addEventListener('keydown', e => {
+  if (e.key in ARROWS) { if (!e.repeat) queue.push({ type: 'steer', dir: ARROWS[e.key] }); e.preventDefault(); }
+  else if (e.key === ' ') { if (!e.repeat) queue.push({ type: 'restart' }); e.preventDefault(); }
+  else if (e.key === 'Escape') { if (!e.repeat) queue.push({ type: 'escape' }); }
+});
+window.addEventListener('blur', () => { queue.length = 0; });
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) queue.length = 0;
+  else { acc = 0; last = performance.now(); }
+});
+
+// ---------- main loop: fixed 60 Hz step, rAF render ----------
+let acc = 0, last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (stopped || document.hidden) return;
+  if (now - last > 1000) { last = now; acc = 0; } // safety against long stalls
+  acc += now - last;
+  last = now;
+  while (acc >= 1000 / 60) { acc -= 1000 / 60; step(); if (stopped) break; }
+  render();
+}
+
+resetGame();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
