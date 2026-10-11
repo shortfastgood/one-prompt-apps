@@ -114,7 +114,7 @@ function fixConnectivity(m) {
 function resetGame() {
   maze = genMaze();
   score = 0; lives = 3; gameOver = false; stopped = false; queue = [];
-  player = { x: 1, y: 1, dir: [1, 0], timer: 0, mouthOpen: true, mouthTimer: 0, powered: false, powerTimer: 0 };
+  player = { x: 1, y: 1, dir: null, timer: 0, mouthOpen: true, mouthTimer: 0, powered: false, powerTimer: 0 };
   ghosts = GHOST_DEFS.map(d => ({
     def: d, x: d.pos.x, y: d.pos.y,
     dir: DIRS[Math.floor(Math.random() * 4)], timer: 0,
@@ -140,6 +140,12 @@ function respawnGhost(g) { // eaten: new ghost of same colour in the house slot
 }
 
 // ---------- simulation ----------
+function eatAt(x, y) { // consume the dot/pellet on the cell the player just entered
+  const v = maze[y][x];
+  if (v === 2) { maze[y][x] = 0; score += 10; }
+  else if (v === 3) { maze[y][x] = 0; score += 50; player.powered = true; player.powerTimer = 300; }
+}
+
 function step() {
   // event phase: queued presses in arrival order
   while (queue.length) {
@@ -150,7 +156,7 @@ function step() {
       const [dx, dy] = ev.dir;
       if (!player.dir || player.dir[0] !== dx || player.dir[1] !== dy) {
         const nx = player.x + dx, ny = player.y + dy;
-        if (!blocked(maze[ny][nx])) { player.x = nx; player.y = ny; player.dir = ev.dir; player.timer = 0; }
+        if (!blocked(maze[ny][nx])) { player.x = nx; player.y = ny; player.dir = ev.dir; player.timer = 0; eatAt(nx, ny); }
       }
     }
   }
@@ -165,9 +171,7 @@ function step() {
       const nx = player.x + dx, ny = player.y + dy;
       if (!blocked(maze[ny][nx])) {
         player.x = nx; player.y = ny;
-        const v = maze[ny][nx];
-        if (v === 2) { maze[ny][nx] = 0; score += 10; }
-        else if (v === 3) { maze[ny][nx] = 0; score += 50; player.powered = true; player.powerTimer = 300; }
+        eatAt(nx, ny);
       } else player.dir = null; // wall ahead: stand still until next steer
     }
   }
