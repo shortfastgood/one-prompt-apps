@@ -8,13 +8,7 @@ Here the idea is to start from an existing implementation in Python and to ask t
 
 ## Prompt
 
-The detailed prompt is [here](../../prompts/pacman.prompt.md)
-
-## Generation History
-
-**September 2026** The reference implementation was done first using Codex GPT-6 Astra and finished by GitHub Copilot.
-**October 2026** The implementation was split in two phases, code generation and test generation, using different sessions.
-
+The detailed prompts are [generation](../../prompts/pacman.generation.md) and [verification](../../prompts/pacman.verification.md)
 
 ## Preview
 
@@ -23,3 +17,12 @@ The detailed prompt is [here](../../prompts/pacman.prompt.md)
 ### Documentation
 
 - [Codex version documentation](./by-codex-gpt-6/README.md)
+- [Qwen 3.8 version documentation](./by-qwen3.8-27b-4bit/README.md) 
+- [Qwen 3.8 flash next version documentation](./qwen3.8-flash-next-4bit/README.md)
+
+## Document History
+| Date | Author | Description | 
+|------|--------|-------------|
+| 2026-10-02 | Daniele Denti | The reference implementation was done first using Codex GPT-6 Astra and finished by GitHub Copilot. |
+| 2026-10-08 | Daniele Denti | The implementation was split in two phases, code generation and test generation, using different sessions. |
+| 2026-10-11 | Daniele Denti | Detailed test suite generation plan based on the verification prompt. |
